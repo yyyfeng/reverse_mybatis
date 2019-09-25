@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generate.dao.GStuproMapper">
+  <resultMap id="BaseResultMap" type="com.generate.pojo.GStupro">
+    <constructor>
+      <idArg column="stuproId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="stuId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="proId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="joinDate" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="joinStatus" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="awardStatus" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    stuproId, stuId, proId, joinDate, joinStatus, awardStatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from g_stupro
+    where stuproId = #{stuproid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from g_stupro
+    where stuproId = #{stuproid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.generate.pojo.GStupro">
+    insert into g_stupro (stuproId, stuId, proId, 
+      joinDate, joinStatus, awardStatus
+      )
+    values (#{stuproid,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{proid,jdbcType=INTEGER}, 
+      #{joindate,jdbcType=DATE}, #{joinstatus,jdbcType=INTEGER}, #{awardstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generate.pojo.GStupro">
+    insert into g_stupro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuproid != null">
+        stuproId,
+      </if>
+      <if test="stuid != null">
+        stuId,
+      </if>
+      <if test="proid != null">
+        proId,
+      </if>
+      <if test="joindate != null">
+        joinDate,
+      </if>
+      <if test="joinstatus != null">
+        joinStatus,
+      </if>
+      <if test="awardstatus != null">
+        awardStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuproid != null">
+        #{stuproid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="proid != null">
+        #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="joindate != null">
+        #{joindate,jdbcType=DATE},
+      </if>
+      <if test="joinstatus != null">
+        #{joinstatus,jdbcType=INTEGER},
+      </if>
+      <if test="awardstatus != null">
+        #{awardstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generate.pojo.GStupro">
+    update g_stupro
+    <set>
+      <if test="stuid != null">
+        stuId = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="proid != null">
+        proId = #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="joindate != null">
+        joinDate = #{joindate,jdbcType=DATE},
+      </if>
+      <if test="joinstatus != null">
+        joinStatus = #{joinstatus,jdbcType=INTEGER},
+      </if>
+      <if test="awardstatus != null">
+        awardStatus = #{awardstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where stuproId = #{stuproid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generate.pojo.GStupro">
+    update g_stupro
+    set stuId = #{stuid,jdbcType=INTEGER},
+      proId = #{proid,jdbcType=INTEGER},
+      joinDate = #{joindate,jdbcType=DATE},
+      joinStatus = #{joinstatus,jdbcType=INTEGER},
+      awardStatus = #{awardstatus,jdbcType=INTEGER}
+    where stuproId = #{stuproid,jdbcType=INTEGER}
+  </update>
+</mapper>
